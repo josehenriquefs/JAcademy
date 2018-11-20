@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!--Import Thymeleaf-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>JAcademy-Salas</title>
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="materialize/css/materialize.css" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="materialize.min.css" media="screen,projection"/>
+    <style type="text/css">
+        table.striped>tbody>tr:nth-child(odd){
+            background-color: rgba(158,154,154,0.5);
+        }
+
+        form input[type = submit]{
+            color:white;
+        }
+
+    </style>
+</head>
+<body>
+<h3>Salas</h3>
+<br>
+<h5>Cadastro de salas</h5>
+
+<div class="row">
+    <!--Campo para dados da sala-->
+    <form action="salvarsalas" method="post" th:object="${sala}" class="col s12" id="formsalvarsalas">
+        <div class="row">
+            <div class="input-field col s6">
+                <label for="id" class="active">Id</label>
+                <input name="id" th:field="*{id}" readonly="readonly" id="id" class="validate">
+            </div>
+            <div class="input-field col s6">
+                <label for="nome" class="active">Nome</label>
+                <input name="nome" th:field="*{nome}" id="nome" class="validate">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <label for="disponibilidade" class="active">Disponibilidade</label>
+                <input name="disponibilidade" th:field="*{disponibilidade}" id="disponibilidade" class="validate">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s6">
+                <input class="waves-effect waves-light btn" type="submit" value="Salvar">
+                <button class="waves-effect waves-light btn"
+                        onclick="document.getElementById('formsalvarsalas').reset();">Novo
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+<br> <br>
+
+<!--Campo para listar sala-->
+<br> <br>
+
+<div class="row">
+    <!--Campo para pesquisar sala por nome-->
+    <form action="pesquisarsalas" method="post" class="col s12">
+        <div class="row">
+            <div class="input-field col s12">
+                <label for="nomepesquisa" class="active">Pesquisa por nome: </label>
+                <input name="nomepesquisa" id="nomepesquisa" class="validate">
+                <input class="waves-effect waves-light btn" type="submit" value="Buscar">
+                <a class="waves-effect waves-light btn" href="/listarsalas">Listar salas</a>
+            </div>
+        </div>
+    </form>
+</div>
+<br> <br>
+
+<!--Campo para listar salas-->
+<table class="striped">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Disponibilidade</th>
+        <th>Editar</th>
+        <th>Excluir</th>
+    </tr>
+    </thead>
+    <tr th:each="sala : ${salas}">
+        <td th:text=${sala.id}></td>
+        <td th:text=${sala.nome}></td>
+        <td th:text=${sala.disponibilidade}></td>
+        <td><a th:href="@{/editarsalas/{idsala}(idsala=${sala.id})}">Editar</a></td>
+        <td><a th:href="@{/excluirsalas/{idsala}(idsala=${sala.id})}">Excluir</a></td>
+    </tr>
+</table>
+
+<!--JavaScript at end of body for optimized loading-->
+<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+<script type="text/javascript" src="materialize/js/materialize.js"></script>
+</body>
+</html>
