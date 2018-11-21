@@ -28,7 +28,7 @@
 
 <div class="row">
     <!--Campo para dados da sala-->
-    <form action="salvarsalas" method="post" th:object="${sala}" class="col s12" id="formsalvarsalas">
+    <form action="salvar" method="post" th:object="${sala}" class="col s12" id="formsalvarsalas">
         <div class="row">
             <div class="input-field col s6">
                 <label for="id" class="active">Id</label>
@@ -70,7 +70,7 @@
                 <label for="nomepesquisa" class="active">Pesquisa por nome: </label>
                 <input name="nomepesquisa" id="nomepesquisa" class="validate">
                 <input class="waves-effect waves-light btn" type="submit" value="Buscar">
-                <a class="waves-effect waves-light btn" href="/listarsalas">Listar salas</a>
+                <a class="waves-effect waves-light btn" href="/salas">Listar salas</a>
             </div>
         </div>
     </form>
@@ -90,10 +90,10 @@
     </thead>
     <tr th:each="sala : ${salas}">
         <td th:text=${sala.id}></td>
-        <td th:text=${sala.nome}></td>
+        <td><a th:href="@{/cadeiras/{idsala}(idsala=${sala.id})}"><span th:text=${sala.nome}></span></a></td>
         <td th:text=${sala.disponibilidade}></td>
         <td><a th:href="@{/editarsalas/{idsala}(idsala=${sala.id})}">Editar</a></td>
-        <td><a th:href="@{/excluirsalas/{idsala}(idsala=${sala.id})}">Excluir</a></td>
+        <td><a th:href="@{/excluir/{idsala}(idsala=${sala.id})}">Excluir</a></td>
     </tr>
 </table>
 
