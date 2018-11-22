@@ -8,14 +8,22 @@ import java.util.Set;
 public class EnderecoEntity<T extends PessoaEntity> extends GenericEntity {
     private static final long serialVersionUID = 4L;
 
-    @OneToMany(mappedBy = "endereco")
-    private Set<T> pessoas;
+    @ManyToOne
+    private SalaEntity sala;
 
     private String bairro;
     private String cidade;
     private String logradoro;
     private String cep;
     private int numero;
+
+    public SalaEntity getSala() {
+        return sala;
+    }
+
+    public void setSala(SalaEntity sala) {
+        this.sala = sala;
+    }
 
     public String getBairro() {
         return bairro;

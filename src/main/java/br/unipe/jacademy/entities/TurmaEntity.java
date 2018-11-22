@@ -21,6 +21,7 @@ public class TurmaEntity extends GenericEntity {
 
     @ManyToOne
     private SalaEntity sala;
+
     private Date horario;
 
     public SalaEntity getSala() {

@@ -20,6 +20,7 @@
         form input[type = submit]{
             color:white;
         }
+
     </style>
 </head>
 <body>
@@ -33,6 +34,42 @@
         <p>ID: <span th:text="${sala.id}"></span></p>
         <p>Nome: <span th:text="${sala.nome}"></span></p>
         <p>Disponibilidade: <span th:text="${sala.disponibilidade}"></span></p>
+    </div>
+
+    <h5>Endereço</h5>
+    <div class="row">
+        <form th:action="@{/addendereco/{idsala}(idsala=${sala.id})}" method="post" class="col s30">
+
+            <div class="row">
+
+                <div class="input-field col s6">
+                    <label class="active" for="bairro">Bairro:</label>
+                    <input id="bairro" name="bairro" class="validate">
+                </div>
+
+                <div class="input-field col s6">
+                    <label class="active" for="cidade">Cidade:</label>
+                    <input id="cidade" name="cidade" class="validate">
+                </div>
+
+                <div class="input-field col s6">
+                    <label class="active" for="logradoro">Logradoro(Rua/Av):</label>
+                    <input id="logradoro" name="logradoro" class="validate">
+                </div>
+
+                <div class="input-field col s6">
+                    <label class="active" for="cep">CEP:</label>
+                    <input id="cep" name="cep" class="validate">
+                </div>
+
+                <div class="input-field col s6">
+                    <label class="active" for="numero">Numero:</label>
+                    <input id="numero" name="numero" class="validate">
+                </div>
+
+                <input type="submit" value="Adicionar" class="waves-effect waves-light btn">
+            </div>
+        </form>
     </div>
 
 </div>

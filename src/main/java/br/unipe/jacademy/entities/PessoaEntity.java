@@ -8,9 +8,6 @@ import java.util.Set;
 public abstract class PessoaEntity extends GenericEntity {
     private static final long serialVersionUID = 5L;
 
-    @ManyToOne
-    private EnderecoEntity endereco;
-
     private String nome;
     private String sobrenome;
     private String mae;

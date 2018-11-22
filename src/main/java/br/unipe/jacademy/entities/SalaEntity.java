@@ -10,10 +10,14 @@ import java.util.Set;
 public class SalaEntity extends GenericEntity {
     private static final long serialVersionUID = 7L;
 
+    @OneToMany(mappedBy = "sala")
+    private Set<TurmaEntity> turmas;
+
+    @OneToMany(mappedBy = "sala")
+    private Set<EnderecoEntity> enderecos;
+
     private String nome;
     private int disponibilidade;
-    @OneToMany
-    private Set<TurmaEntity> turmas;
 
     public String getNome() {
         return nome;

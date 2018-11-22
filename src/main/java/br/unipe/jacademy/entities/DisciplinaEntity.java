@@ -9,13 +9,14 @@ import java.util.Set;
 @Table(name = "Disciplinas")
 public class DisciplinaEntity extends GenericEntity {
     private static final long serialVersionUID = 3L;
+
+    @OneToMany(mappedBy = "disciplina")
+    private Set<TurmaEntity> turmas;
+
     private String nome;
     private float nota1;
     private float nota2;
     private float nota3;
-
-    @OneToMany(mappedBy = "disciplina")
-    private Set<TurmaEntity> turmas;
 
     public String getNome() {
         return nome;
