@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 public interface ISalaRepositorory extends IGenericRepository<SalaEntity>{
 
     @Query("select s from SalaEntity s where s.nome like %?1%")
