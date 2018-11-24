@@ -1,21 +1,16 @@
 <!DOCTYPE html>
-<!--Import Thymeleaf-->
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>JAcademy-Salas</title>
+    <title>JAcademy</title>
 
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
-
-    </style>
 </head>
 <body>
-<h3>Salas</h3>
-<br>
-<h5>Cadastro de salas</h5>
+<h1>Sala</h1>
 
 <div class="row">
     <!--Campo para dados da sala-->
@@ -49,22 +44,6 @@
     </form>
 </div>
 <br> <br>
-
-<br> <br>
-
-<div class="row">
-    <!--Campo para pesquisar sala por nome-->
-    <form action="pesquisarsalas" method="post" class="col s12">
-        <div class="row">
-            <div class="input-field col s12">
-                <label for="nomepesquisa" class="active">Pesquisa por nome: </label>
-                <input name="nomepesquisa" id="nomepesquisa" class="validate">
-                <input class="waves-effect waves-light btn" type="submit" value="Buscar">
-                <a class="waves-effect waves-light btn" href="/salas">Listar salas</a>
-            </div>
-        </div>
-    </form>
-</div>
 <br> <br>
 
 <!--Campo para listar salas-->
@@ -82,12 +61,12 @@
         <td th:text=${sala.id}></td>
         <td><a th:href="@{/endereco/{idsala}(idsala=${sala.id})}"><span th:text=${sala.nome}></span></a></td>
         <td th:text=${sala.disponibilidade}></td>
-        <td><a th:href="@{/sala/editar/{idsala}(idsala=${sala.id})}">Editar</a></td>
-        <td><a th:href="@{/sala/excluir/{idsala}(idsala=${sala.id})}">Excluir</a></td>
+        <td><a th:href="@{/editarsalas/{idsala}(idsala=${sala.id})}">Editar</a></td>
+        <td><a th:href="@{/excluir/{idsala}(idsala=${sala.id})}">Excluir</a></td>
     </tr>
 </table>
 
-      <!--JavaScript at end of body for optimized loading-->
-      <script type="text/javascript" src="js/materialize.min.js"></script>
+<!--JavaScript at end of body for optimized loading-->
+<script type="text/javascript" src="js/materialize.min.js"></script>
 </body>
 </html>
