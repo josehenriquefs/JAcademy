@@ -13,9 +13,6 @@ public class SalaEntity extends GenericEntity {
     @OneToMany(mappedBy = "sala")
     private Set<TurmaEntity> turmas;
 
-    @OneToMany(mappedBy = "sala")
-    private Set<EnderecoEntity> enderecos;
-
     private String nome;
     private int disponibilidade;
 

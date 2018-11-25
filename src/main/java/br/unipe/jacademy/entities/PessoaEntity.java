@@ -8,12 +8,23 @@ import java.util.Set;
 public abstract class PessoaEntity extends GenericEntity {
     private static final long serialVersionUID = 5L;
 
+    @OneToOne
+    private EnderecoEntity endereco;
+
     private String nome;
     private String sobrenome;
     private String mae;
     private String pai;
     private String matricula;
     private String email;
+
+    public EnderecoEntity getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(EnderecoEntity endereco) {
+        this.endereco = endereco;
+    }
 
     public String getNome() {
         return nome;

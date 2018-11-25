@@ -5,11 +5,11 @@ import java.util.Set;
 
 @Entity
 @Table(name = "Enderecos")
-public class EnderecoEntity<T extends PessoaEntity> extends GenericEntity {
+public class EnderecoEntity extends GenericEntity {
     private static final long serialVersionUID = 4L;
 
     @ManyToOne
-    private SalaEntity sala;
+    private PessoaEntity pessoa;
 
     private String bairro;
     private String cidade;
@@ -17,12 +17,12 @@ public class EnderecoEntity<T extends PessoaEntity> extends GenericEntity {
     private String cep;
     private int numero;
 
-    public SalaEntity getSala() {
-        return sala;
+    public PessoaEntity getPessoa() {
+        return pessoa;
     }
 
-    public void setSala(SalaEntity sala) {
-        this.sala = sala;
+    public void setPessoa(PessoaEntity pessoa) {
+        this.pessoa = pessoa;
     }
 
     public String getBairro() {
