@@ -8,18 +8,14 @@
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="/css/materialize.min.css" media="screen,projection"/>
 
     </style>
 </head>
 <body>
-<h3>Salas</h3>
-<br>
-<h5>Cadastro de salas</h5>
-
 <div class="row">
     <!--Campo para dados da sala-->
-    <form action="salvar" method="post" th:object="${sala}" class="col s12" id="formsalvarsalas">
+    <form action="/sala/salvar" method="post" th:object="${sala}" class="col s12" id="formsalvar">
         <div class="row">
             <div class="input-field col s6">
                 <label for="id" class="active">Id</label>
@@ -41,9 +37,6 @@
         <div class="row">
             <div class="input-field col s6">
                 <input class="waves-effect waves-light btn" type="submit" value="Salvar">
-                <button class="waves-effect waves-light btn"
-                        onclick="document.getElementById('formsalvarsalas').reset();">Novo
-                </button>
             </div>
         </div>
     </form>
@@ -88,6 +81,6 @@
 </table>
 
       <!--JavaScript at end of body for optimized loading-->
-      <script type="text/javascript" src="js/materialize.min.js"></script>
+      <script type="text/javascript" src="/js/materialize.min.js"></script>
 </body>
 </html>

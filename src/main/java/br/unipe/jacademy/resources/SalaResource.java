@@ -1,8 +1,6 @@
 package br.unipe.jacademy.resources;
 
-import br.unipe.jacademy.entities.EnderecoEntity;
 import br.unipe.jacademy.entities.SalaEntity;
-import br.unipe.jacademy.services.EnderecoService;
 import br.unipe.jacademy.services.SalaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,77 +11,44 @@ import java.util.Map;
 import java.util.Optional;
 
 @Controller
-public class SalaResource <T extends Object>{
+public class SalaResource extends GenericResource<SalaService, SalaEntity> {
 
     @Autowired
     private SalaService service;
 
-    @Autowired
-    private EnderecoService enderecoService;
-
-    private ModelAndView modelAndView;
-    private Map<String, T> atributo;
-
-    @RequestMapping(method = RequestMethod.GET, value = "/salas")
+    @GetMapping("/salas")
     public ModelAndView inicio() {
-        return salas("cadastro/salas");
+        ModelAndView modelAndView = view("sala/adicionar", "salas", service.getAll());
+        return modelAndView.addAllObjects(novo());
     }
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "**/salvar")
+    @PostMapping("/sala/salvar")
     public ModelAndView salvar(SalaEntity entity) {
-        entity = service.salvar(entity);
-        return salas();
+        service.salvar(entity);
+        return inicio();
     }
 
     @GetMapping("/sala/editar/{idsala}")
     public ModelAndView editar(@PathVariable("idsala") Long idsala) {
-        ModelAndView modelAndView = new ModelAndView("sala/editar");
         Optional<SalaEntity> optional = service.getPorId(idsala);
-        return modelAndView.addObject("sala", optional.get());
+        ModelAndView modelAndView = view("sala/editar", "sala", optional.get());
+        return modelAndView.addAllObjects(model("salas", service.getAll()));
     }
 
     @GetMapping("/sala/excluir/{idsala}")
     public ModelAndView excluir(@PathVariable("idsala") Long idsala) {
-        service.excluiPorId(idsala);
-        return salas();
+        service.excluirPorId(idsala);
+        return inicio();
     }
 
-    @PostMapping("**/pesquisarsalas")
-    public ModelAndView pesquisar(@RequestParam("nomepesquisa") String nomepesquisa) {
-        ModelAndView modelAndView = new ModelAndView("cadastro/salas");
-        return modelAndView.addObject("salas", service.getPorNome(nomepesquisa)).addObject("sala", new SalaEntity());
+    @PostMapping("**/sala/pesquisar")
+    public ModelAndView pesquisar(@RequestParam("nome") String nome) {
+        ModelAndView modelAndView = view("sala/listar","salas", service.getPorNome(nome));
+        return modelAndView.addAllObjects(novo());
     }
 
-    @GetMapping("/endereco/{idsala}")
-    public ModelAndView cadeiras(@PathVariable("idsala") Long idsala) {
-        Optional<SalaEntity> optional = service.getPorId(idsala);
-        ModelAndView modelAndView = new ModelAndView("cadastro/endereco");
-        modelAndView.addObject("salas", optional.get());
-        return modelAndView;
-    }
-
-    @PostMapping("**/addendereco/{idsala}")
-    public ModelAndView addEndereco(EnderecoEntity endereco, @PathVariable("idsala") Long idsala) {
-        ModelAndView modelAndView = new ModelAndView("cadastro/endereco");
-        SalaEntity sala = service.getPorId(idsala).get();
-        endereco.setSala(sala);
-        enderecoService.salvar(endereco);
-        return modelAndView.addObject("salas", sala);
-    }
-
-    private ModelAndView salas(String path) {
-        ModelAndView modelAndView = new ModelAndView(path);
-        return modelAndView.addObject("salas", service.getAll());
-    }
-
-    private ModelAndView newSala() {
-        ModelAndView modelAndView = new ModelAndView(path);
-        return modelAndView.addObject("salas", service.getAll());
-    }
-
-    private ModelAndView prepara(String string, T atributo) {
-        this.atributo.
-        return atributo
+    private Map novo(){
+        return model("sala", new SalaEntity());
     }
 }
