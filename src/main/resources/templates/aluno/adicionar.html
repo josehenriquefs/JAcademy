@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Sala - Adicionar</title>
+    <title>Aluno - Adicionar</title>
 
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -14,23 +14,47 @@
 </head>
 <body>
 <div class="row">
-    <!--Campo para dados da sala-->
-    <form action="/sala/salvar" method="post" th:object="${sala}" class="col s12" id="formsalvar">
+    <!--Campo para dados da aluno-->
+    <form action="/aluno/salvar" method="post" th:object="${aluno}" class="col s12" id="formsalvar">
         <div class="row">
-            <div class="input-field col s6">
+            <!--
+            <div class="input-field col s4">
                 <label for="id" class="active">Id</label>
                 <input name="id" th:field="*{id}" readonly="readonly" id="id" class="validate">
             </div>
+            -->
             <div class="input-field col s6">
                 <label for="nome" class="active">Nome</label>
                 <input name="nome" th:field="*{nome}" id="nome" class="validate">
             </div>
+
+            <div class="input-field col s6">
+                <label for="sobrenome" class="active">Sobrenome</label>
+                <input name="sobrenome" th:field="*{sobrenome}" id="sobrenome" class="validate">
+            </div>
         </div>
 
         <div class="row">
-            <div class="input-field col s12">
-                <label for="disponibilidade" class="active">Disponibilidade</label>
-                <input name="disponibilidade" th:field="*{disponibilidade}" id="disponibilidade" class="validate">
+            <div class="input-field col s6">
+                <label for="mae" class="active">Mãe</label>
+                <input name="mae" th:field="*{mae}" id="mae" class="validate">
+            </div>
+
+            <div class="input-field col s6">
+                <label for="pai" class="active">Pai</label>
+                <input name="pai" th:field="*{pai}" id="pai" class="validate">
+            </div>
+        </div>
+
+        <div>
+            <div class="input-field col s6">
+                <label for="matricula" class="active">Matrícula</label>
+                <input name="matricula" th:field="*{matricula}" id="matricula" class="validate">
+            </div>
+
+            <div class="input-field col s6">
+                <label for="email" class="active">email</label>
+                <input name="email" th:field="*{email}" id="email" class="validate">
             </div>
         </div>
 
@@ -47,7 +71,7 @@
 
 <div class="row">
     <!--Campo para pesquisar sala por nome-->
-    <form action="/sala/pesquisar" method="post" class="col s12">
+    <form action="/aluno/pesquisar" method="post" class="col s12">
         <div class="row">
             <div class="input-field col s12">
                 <label for="nome" class="active">Pesquisa por nome: </label>
@@ -60,23 +84,29 @@
 </div>
 <br> <br>
 
-<!--Campo para listar salas-->
 <table class="striped">
     <thead>
     <tr>
         <th>ID</th>
         <th>Nome</th>
-        <th>Disponibilidade</th>
+        <th>Sobrenome</th>
+        <th>Mãe</th>
+        <th>Pai</th>
+        <th>Matrícula</th>
         <th>Editar</th>
         <th>Excluir</th>
     </tr>
     </thead>
-    <tr th:each="sala : ${salas}">
-        <td th:text=${sala.id}></td>
-        <td><a th:href="@{/endereco/{idsala}(idsala=${sala.id})}"><span th:text=${sala.nome}></span></a></td>
-        <td th:text=${sala.disponibilidade}></td>
-        <td><a th:href="@{/sala/editar/{idsala}(idsala=${sala.id})}">Editar</a></td>
-        <td><a th:href="@{/sala/excluir/{idsala}(idsala=${sala.id})}">Excluir</a></td>
+    <tr th:each="aluno : ${alunos}">
+        <td th:text=${aluno.id}></td>
+        <td th:text=${aluno.nome}></td>
+        <td th:text=${aluno.sobrenome}></td>
+        <td th:text=${aluno.mae}></td>
+        <td th:text=${aluno.pai}></td>
+        <td th:text=${aluno.matricula}></td>
+        <td th:text=${aluno.email}></td>
+        <td><a th:href="@{/aluno/editar/{idaluno}(idaluno=${aluno.id})}">Editar</a></td>
+        <td><a th:href="@{/aluno/excluir/{idaluno}(idaluno=${aluno.id})}">Excluir</a></td>
     </tr>
 </table>
 

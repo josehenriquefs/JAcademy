@@ -42,7 +42,7 @@ public class SalaResource extends GenericResource<SalaService, SalaEntity> {
         return inicio();
     }
 
-    @PostMapping("**/sala/pesquisar")
+    @PostMapping("/sala/pesquisar")
     public ModelAndView pesquisar(@RequestParam("nome") String nome) {
         ModelAndView modelAndView = view("sala/listar","salas", service.getPorNome(nome));
         return modelAndView.addAllObjects(novo());

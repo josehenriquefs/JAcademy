@@ -1,21 +1,19 @@
 <!DOCTYPE html>
-<!--Import Thymeleaf-->
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Sala - Adicionar</title>
+    <title>Aluno - Editar</title>
 
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="/css/materialize.min.css" media="screen,projection"/>
-
-    </style>
+    <link type="text/css" rel="stylesheet" href="/css/materialize.css" media="screen,projection"/>
 </head>
 <body>
 <div class="row">
-    <!--Campo para dados da sala-->
-    <form action="/sala/salvar" method="post" th:object="${sala}" class="col s12" id="formsalvar">
+    <!--Campo para dados da aluno-->
+    <form action="/aluno/salvar" method="post" th:object="${aluno}" class="col s12" id="formsalvar">
         <div class="row">
             <div class="input-field col s6">
                 <label for="id" class="active">Id</label>
@@ -37,30 +35,17 @@
         <div class="row">
             <div class="input-field col s6">
                 <input class="waves-effect waves-light btn" type="submit" value="Salvar">
+                <button class="waves-effect waves-light btn"
+                        onclick="document.getElementById('formsalvar').reset();">Novo
+                </button>
             </div>
         </div>
     </form>
 </div>
 <br> <br>
-
 <br> <br>
 
-<div class="row">
-    <!--Campo para pesquisar sala por nome-->
-    <form action="/sala/pesquisar" method="post" class="col s12">
-        <div class="row">
-            <div class="input-field col s12">
-                <label for="nome" class="active">Pesquisa por nome: </label>
-                <input name="nome" id="nome" class="validate">
-                <input class="waves-effect waves-light btn" type="submit" value="Buscar">
-                <a class="waves-effect waves-light btn" href="/salas">Listar salas</a>
-            </div>
-        </div>
-    </form>
-</div>
-<br> <br>
-
-<!--Campo para listar salas-->
+<!--Campo para listar alunos-->
 <table class="striped">
     <thead>
     <tr>
@@ -71,16 +56,17 @@
         <th>Excluir</th>
     </tr>
     </thead>
-    <tr th:each="sala : ${salas}">
-        <td th:text=${sala.id}></td>
-        <td><a th:href="@{/endereco/{idsala}(idsala=${sala.id})}"><span th:text=${sala.nome}></span></a></td>
-        <td th:text=${sala.disponibilidade}></td>
-        <td><a th:href="@{/sala/editar/{idsala}(idsala=${sala.id})}">Editar</a></td>
-        <td><a th:href="@{/sala/excluir/{idsala}(idsala=${sala.id})}">Excluir</a></td>
+    <tr th:each="aluno : ${alunos}">
+        <td th:text=${aluno.id}></td>
+        <td><a th:href="@{/endereco/{idaluno}(idaluno=${aluno.id})}"><span th:text=${aluno.nome}></span></a></td>
+        <td th:text=${aluno.disponibilidade}></td>
+        <td><a th:href="@{/editaralunos/{idaluno}(idaluno=${aluno.id})}">Editar</a></td>
+        <td><a th:href="@{/excluir/{idaluno}(idaluno=${aluno.id})}">Excluir</a></td>
     </tr>
 </table>
 
-      <!--JavaScript at end of body for optimized loading-->
-      <script type="text/javascript" src="/js/materialize.min.js"></script>
+<!--JavaScript at end of body for optimized loading-->
+<script type="text/javascript" src="/js/materialize.min.js"></script>
+<script type="text/javascript" src="/js/materialize.js"></script>
 </body>
 </html>

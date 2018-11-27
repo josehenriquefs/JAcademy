@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface ISalaRepositorory extends IGenericRepository<SalaEntity>{
+public interface ISalaRepository extends IGenericRepository<SalaEntity>{
 
     @Query("select s from SalaEntity s where s.nome like %?1%")
     List<SalaEntity> findSalasByName(String nome);
