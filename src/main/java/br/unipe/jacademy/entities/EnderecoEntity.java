@@ -1,7 +1,8 @@
 package br.unipe.jacademy.entities;
 
-import javax.persistence.*;
-import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "Enderecos")
@@ -13,9 +14,9 @@ public class EnderecoEntity extends GenericEntity {
 
     private String bairro;
     private String cidade;
-    private String logradoro;
+    private String logradouro;
     private String cep;
-    private int numero;
+    private String numero;
 
     public PessoaEntity getPessoa() {
         return pessoa;
@@ -41,12 +42,12 @@ public class EnderecoEntity extends GenericEntity {
         this.cidade = cidade;
     }
 
-    public String getLogradoro() {
-        return logradoro;
+    public String getLogradouro() {
+        return logradouro;
     }
 
-    public void setLogradoro(String logradoro) {
-        this.logradoro = logradoro;
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
     }
 
     public String getCep() {
@@ -57,11 +58,11 @@ public class EnderecoEntity extends GenericEntity {
         this.cep = cep;
     }
 
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 }

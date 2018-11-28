@@ -14,6 +14,8 @@ public class DBService {
     private ISalaRepository salaRepositorory;
     @Autowired
     private IAlunoRepository alunoRepository;
+    @Autowired
+    private IEnderecoRepository enderecoRepository;
 
     public void instantiateTestDatabase() throws ParseException {
         int letra = 'A';
@@ -32,11 +34,23 @@ public class DBService {
                 AlunoEntity alunoEntity = new AlunoEntity();
                 alunoEntity.setNome("Nome"+(char) (letra + i) + String.valueOf(j));
                 alunoEntity.setSobrenome("Sobrenome"+(char) (letra + i) + String.valueOf(j));
-                alunoEntity.setMae("Mãe "+(char) (letra + i) + String.valueOf(j));
-                alunoEntity.setPai("Pai "+(char) (letra + i) + String.valueOf(j));
+                alunoEntity.setMae("Mãe"+(char) (letra + i) + String.valueOf(j));
+                alunoEntity.setPai("Pai"+(char) (letra + i) + String.valueOf(j));
                 alunoEntity.setMatricula("15105666720"+(char) (letra + i) + String.valueOf(j));
                 alunoEntity.setEmail("email"+(char) (letra + i) + String.valueOf(j)+"@gmail.com");
                 alunoRepository.save(alunoEntity);
+            }
+        }
+
+        for (int i = 0; i != 10; i++) {
+            for (int j = 0; j != 3; j++) {
+                EnderecoEntity enderecoEntity = new EnderecoEntity();
+                enderecoEntity.setBairro("Bairro"+(char) (letra + i) + String.valueOf(j));
+                enderecoEntity.setCep("CEP"+(char) (letra + i) + String.valueOf(j));
+                enderecoEntity.setCidade("Cidade"+(char) (letra + i) + String.valueOf(j));
+                enderecoEntity.setLogradouro("Logradouro"+(char) (letra + i) + String.valueOf(j));
+                enderecoEntity.setNumero("666"+(char) (letra + i) + String.valueOf(j));
+                enderecoRepository.save(enderecoEntity);
             }
         }
     }
