@@ -5,23 +5,23 @@ import br.unipe.jacademy.repositories.IGenericRepository;
 
 import java.util.Optional;
 
-public abstract class GenericService<E extends GenericEntity, R extends IGenericRepository<E>> {
+public abstract class GenericService<Entity extends GenericEntity, Repository extends IGenericRepository<Entity>> {
 
-    protected R repository;
+    protected Repository repository;
 
-    protected GenericService(R repository) {
+    protected GenericService(Repository repository) {
         this.repository = repository;
     }
 
-    public Iterable<E> getAll() {
+    public Iterable<Entity> getAll() {
         return repository.findAll();
     }
 
-    public Optional<E> getPorId(Long idsala) {
+    public Optional<Entity> getPorId(Long idsala) {
         return repository.findById(idsala);
     }
 
-    public E salvar(E entity) {
+    public Entity salvar(Entity entity) {
         return repository.save(entity);
     }
 

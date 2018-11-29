@@ -8,5 +8,5 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Transactional
-public interface IGenericRepository<T extends GenericEntity> extends CrudRepository<T, Long> {
+public interface IGenericRepository<Entity extends GenericEntity> extends CrudRepository<Entity, Long> {
 }

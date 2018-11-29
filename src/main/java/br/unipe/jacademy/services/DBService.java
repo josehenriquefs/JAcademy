@@ -38,6 +38,7 @@ public class DBService {
                 alunoEntity.setPai("Pai"+(char) (letra + i) + String.valueOf(j));
                 alunoEntity.setMatricula("15105666720"+(char) (letra + i) + String.valueOf(j));
                 alunoEntity.setEmail("email"+(char) (letra + i) + String.valueOf(j)+"@gmail.com");
+                alunoEntity.setSenha("123");
                 alunoRepository.save(alunoEntity);
             }
         }
