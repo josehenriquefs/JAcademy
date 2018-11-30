@@ -11,38 +11,39 @@ import java.util.Map;
 import java.util.Optional;
 
 @Controller
+@RequestMapping("sala")
 public class SalaResource extends GenericResource<SalaService, SalaEntity> {
 
     @Autowired
     private SalaService service;
 
-    @GetMapping("/salas")
+    @GetMapping("/listar")
     public ModelAndView inicio() {
         ModelAndView modelAndView = view("sala/adicionar", "salas", service.getAll());
         return modelAndView.addAllObjects(novo());
     }
 
-
-    @PostMapping("/sala/salvar")
+    @GetMapping("/cadastrar")
     public ModelAndView salvar(SalaEntity entity) {
         service.salvar(entity);
         return inicio();
     }
 
-    @GetMapping("/sala/editar/{idsala}")
+
+    @GetMapping("/editar/{idsala}")
     public ModelAndView editar(@PathVariable("idsala") Long idsala) {
         Optional<SalaEntity> optional = service.getPorId(idsala);
         ModelAndView modelAndView = view("sala/editar", "sala", optional.get());
         return modelAndView.addAllObjects(model("salas", service.getAll()));
     }
 
-    @GetMapping("/sala/excluir/{idsala}")
+    @GetMapping("/excluir/{idsala}")
     public ModelAndView excluir(@PathVariable("idsala") Long idsala) {
         service.excluirPorId(idsala);
         return inicio();
     }
 
-    @PostMapping("/sala/pesquisar")
+    @GetMapping("**/pesquisar")
     public ModelAndView pesquisar(@RequestParam("nome") String nome) {
         ModelAndView modelAndView = view("sala/listar","salas", service.getPorNome(nome));
         return modelAndView.addAllObjects(novo());

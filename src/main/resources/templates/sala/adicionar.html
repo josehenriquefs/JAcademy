@@ -1,64 +1,61 @@
 <!DOCTYPE html>
-<!--Import Thymeleaf-->
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Sala - Adicionar</title>
-
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="/css/materialize.min.css" media="screen,projection"/>
-
-    </style>
-</head>
-<body>
-<div class="row">
-    <!--Campo para dados da sala-->
-    <form action="/sala/salvar" method="post" th:object="${sala}" class="col s12" id="formsalvar">
-        <div class="row">
-            <div class="input-field col s6">
-                <label for="id" class="active">Id</label>
-                <input name="id" th:field="*{id}" readonly="readonly" id="id" class="validate">
-            </div>
-            <div class="input-field col s6">
-                <label for="nome" class="active">Nome</label>
-                <input name="nome" th:field="*{nome}" id="nome" class="validate">
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="input-field col s12">
-                <label for="disponibilidade" class="active">Disponibilidade</label>
-                <input name="disponibilidade" th:field="*{disponibilidade}" id="disponibilidade" class="validate">
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="input-field col s6">
-                <input class="waves-effect waves-light btn" type="submit" value="Salvar">
-            </div>
+            <!--Import Thymeleaf-->
+            <html xmlns="http://www.w3.org/1999/xhtml" th="http://www.thymeleaf.org"
+              lang="pt-br">
+              <head>
+                <meta charset="UTF-8" />
+                <title>Sala - Adicionar</title>
+                <!--Import Google Icon Font-->
+                <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+                  rel="stylesheet" />
+                <!--Import materialize.css-->
+                <link type="text/css" rel="stylesheet" href="/css/materialize.min.css"
+                  media="screen,projection" />
+              </head>
+              <body>
+                <div class="row">
+                  <!--Campo para dados da sala-->
+                  <form action="/sala/cadastrar" th:object="${sala}" xmlns:th="http://www.thymeleaf.org"
+                    class="col s12" id="formsalvar">
+                    <div class="row">
+                      <div class="input-field col s6"> <label for="id" class="active">Id</label>
+                        <input name="id" th:field="*{id}" readonly="readonly" id="id"
+                          class="validate" /> </div>
+                      <div class="input-field col s6"> <label for="nome" class="active">Nome</label>
+                        <input name="nome" th:field="*{nome}" id="nome" class="validate" />
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="input-field col s12"> <label for="disponibilidade"
+                          class="active">Disponibilidade</label> <input name="disponibilidade"
+                          th:field="*{disponibilidade}" id="disponibilidade" class="validate" />
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="input-field col s6"> <input class="waves-effect waves-light btn"
+value="Salvar" type="submit" />
+                      </div>
         </div>
     </form>
 </div>
-<br> <br>
+<br /> <br />
 
-<br> <br>
+<br /> <br />
 
 <div class="row">
     <!--Campo para pesquisar sala por nome-->
-    <form action="/sala/pesquisar" method="post" class="col s12">
+    <form action="/sala/pesquisar" class="col s12">
         <div class="row">
             <div class="input-field col s12">
                 <label for="nome" class="active">Pesquisa por nome: </label>
-                <input name="nome" id="nome" class="validate">
-                <input class="waves-effect waves-light btn" type="submit" value="Buscar">
-                <a class="waves-effect waves-light btn" href="/salas">Listar salas</a>
+                <input name="nome" id="nome" class="validate" />
+                <input class="waves-effect waves-light btn" value="Buscar" type="submit" />
+                <a class="waves-effect waves-light btn" href="/sala/listar">Listar salas</a>
             </div>
         </div>
     </form>
 </div>
-<br> <br>
+<br /> <br />
 
 <!--Campo para listar salas-->
 <table class="striped">
@@ -71,16 +68,15 @@
         <th>Excluir</th>
     </tr>
     </thead>
-    <tr th:each="sala : ${salas}">
-        <td th:text=${sala.id}></td>
-        <td><a th:href="@{/endereco/{idsala}(idsala=${sala.id})}"><span th:text=${sala.nome}></span></a></td>
-        <td th:text=${sala.disponibilidade}></td>
+    <tbody><tr th:each="sala : ${salas}" xmlns:th="http://www.thymeleaf.org">
+        <td th:text="${sala.id}"><br /></td>
+        <td><a th:href="@{/endereco/{idsala}(idsala=${sala.id})}"><span th:text="${sala.nome}"></span></a><br /></td>
+        <td th:text="${sala.disponibilidade}"><br /></td>
         <td><a th:href="@{/sala/editar/{idsala}(idsala=${sala.id})}">Editar</a></td>
         <td><a th:href="@{/sala/excluir/{idsala}(idsala=${sala.id})}">Excluir</a></td>
     </tr>
-</table>
+</tbody></table>
 
       <!--JavaScript at end of body for optimized loading-->
       <script type="text/javascript" src="/js/materialize.min.js"></script>
-</body>
-</html>
+</body></html>
