@@ -3,9 +3,11 @@ package br.unipe.jacademy.services;
 import br.unipe.jacademy.entities.*;
 import br.unipe.jacademy.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
+import java.util.Collection;
 
 @Service
 public class DBService {
@@ -38,7 +40,6 @@ public class DBService {
                 alunoEntity.setPai("Pai"+(char) (letra + i) + String.valueOf(j));
                 alunoEntity.setMatricula("15105666720"+(char) (letra + i) + String.valueOf(j));
                 alunoEntity.setEmail("email"+(char) (letra + i) + String.valueOf(j)+"@gmail.com");
-                alunoEntity.setSenha("123");
                 alunoRepository.save(alunoEntity);
             }
         }

@@ -6,13 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-public abstract class PessoaService<Pessoa extends PessoaEntity, Repository extends IPessoaRepository<Pessoa>> extends GenericService<Pessoa, Repository> implements UserDetailsService {
-
-    @Override
-    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        return super.repository.findByEmail();
-    }
-
+public abstract class PessoaService<Pessoa extends PessoaEntity, Repository extends IPessoaRepository<Pessoa>> extends GenericService<Pessoa, Repository> {
     public PessoaService(Repository repository) {
         super(repository);
     }
