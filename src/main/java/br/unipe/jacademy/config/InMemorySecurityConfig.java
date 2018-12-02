@@ -12,11 +12,15 @@ public class InMemorySecurityConfig {
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+		String userName = "user";
+		String userRole = "USER";
+		String adminName = "admin";
+		String adminRole = "ADMIN";
 		
 		auth
-			.inMemoryAuthentication().withUser("user").password(encoder.encode("user")).roles("USER")
+			.inMemoryAuthentication().withUser(userName).password(encoder.encode(userName)).roles(userRole)
 			.and()
-			.withUser("admin").password(encoder.encode("admin")).roles("ADMIN");
+			.withUser(adminName).password(encoder.encode(adminName)).roles(userRole,adminRole);
 		
 	}
 }

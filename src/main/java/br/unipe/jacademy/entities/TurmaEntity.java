@@ -1,9 +1,12 @@
 package br.unipe.jacademy.entities;
 
-import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
+import java.util.Calendar;
 import java.util.Set;
+
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "Turmas")
@@ -22,13 +25,45 @@ public class TurmaEntity extends GenericEntity {
     @ManyToOne
     private SalaEntity sala;
 
-    private Date horario;
+    private String nome;
+    private Calendar horario;
 
-    public SalaEntity getSala() {
-        return sala;
-    }
+	public Set<AlunoEntity> getAlunos() {
+		return alunos;
+	}
+	public void setAlunos(Set<AlunoEntity> alunos) {
+		this.alunos = alunos;
+	}
+	public DisciplinaEntity getDisciplina() {
+		return disciplina;
+	}
+	public void setDisciplina(DisciplinaEntity disciplina) {
+		this.disciplina = disciplina;
+	}
+	public ProfessorEntity getProfessor() {
+		return professor;
+	}
+	public void setProfessor(ProfessorEntity professor) {
+		this.professor = professor;
+	}
+	public SalaEntity getSala() {
+		return sala;
+	}
+	public void setSala(SalaEntity sala) {
+		this.sala = sala;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public Calendar getHorario() {
+		return horario;
+	}
+	public void setHorario(Calendar horario) {
+		this.horario = horario;
+	}
 
-    public void setSala(SalaEntity sala) {
-        this.sala = sala;
-    }
+    
 }

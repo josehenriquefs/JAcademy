@@ -1,13 +1,14 @@
 package br.unipe.jacademy.services;
 
-import br.unipe.jacademy.entities.*;
-import br.unipe.jacademy.repositories.*;
+import java.text.ParseException;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
-import java.util.Collection;
+import br.unipe.jacademy.entities.SalaEntity;
+import br.unipe.jacademy.entities.TurmaEntity;
+import br.unipe.jacademy.repositories.ISalaRepository;
+import br.unipe.jacademy.repositories.ITurmaRepository;
 
 @Service
 public class DBService {
@@ -15,9 +16,7 @@ public class DBService {
     @Autowired
     private ISalaRepository salaRepositorory;
     @Autowired
-    private IAlunoRepository alunoRepository;
-    @Autowired
-    private IEnderecoRepository enderecoRepository;
+    private ITurmaRepository turmaRepository;
 
     public void instantiateTestDatabase() throws ParseException {
         int letra = 'A';
@@ -31,29 +30,14 @@ public class DBService {
             }
         }
 
+        /*
         for (int i = 0; i != 10; i++) {
             for (int j = 0; j != 3; j++) {
-                AlunoEntity alunoEntity = new AlunoEntity();
-                alunoEntity.setNome("Nome"+(char) (letra + i) + String.valueOf(j));
-                alunoEntity.setSobrenome("Sobrenome"+(char) (letra + i) + String.valueOf(j));
-                alunoEntity.setMae("Mãe"+(char) (letra + i) + String.valueOf(j));
-                alunoEntity.setPai("Pai"+(char) (letra + i) + String.valueOf(j));
-                alunoEntity.setMatricula("15105666720"+(char) (letra + i) + String.valueOf(j));
-                alunoEntity.setEmail("email"+(char) (letra + i) + String.valueOf(j)+"@gmail.com");
-                alunoRepository.save(alunoEntity);
+                TurmaEntity turmaEntity = new TurmaEntity();
+                turmaEntity.setNome("Turma "+(char) (letra + i) + String.valueOf(j));
+                turmaRepository.save(turmaEntity);
             }
         }
-
-        for (int i = 0; i != 10; i++) {
-            for (int j = 0; j != 3; j++) {
-                EnderecoEntity enderecoEntity = new EnderecoEntity();
-                enderecoEntity.setBairro("Bairro"+(char) (letra + i) + String.valueOf(j));
-                enderecoEntity.setCep("CEP"+(char) (letra + i) + String.valueOf(j));
-                enderecoEntity.setCidade("Cidade"+(char) (letra + i) + String.valueOf(j));
-                enderecoEntity.setLogradouro("Logradouro"+(char) (letra + i) + String.valueOf(j));
-                enderecoEntity.setNumero("666"+(char) (letra + i) + String.valueOf(j));
-                enderecoRepository.save(enderecoEntity);
-            }
-        }
+        */
     }
 }
