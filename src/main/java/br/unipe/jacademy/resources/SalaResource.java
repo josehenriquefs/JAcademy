@@ -23,55 +23,55 @@ import br.unipe.jacademy.services.TurmaService;
 public class SalaResource extends GenericResource<SalaService, SalaEntity> {
 
     @Autowired
-    private SalaService salaService;
+    private SalaService service;
     @Autowired
-    private TurmaService turmaService;
+    private TurmaService relacao1Service;
 
     @GetMapping("/listar")
     public ModelAndView inicio() {
-        ModelAndView modelAndView = view("sala/adicionar", "salas", salaService.getAll());
+        ModelAndView modelAndView = view("sala/adicionar", "salas", service.getAll());
         return modelAndView.addAllObjects(novo());
     }
 
     @GetMapping("/cadastrar")
     public ModelAndView salvar(SalaEntity entity) {
-        salaService.salvar(entity);
+        service.salvar(entity);
         return inicio();
     }
 
-    @GetMapping("/editar/{idsala}")
-    public ModelAndView editar(@PathVariable("idsala") Long idsala) {
-        Optional<SalaEntity> optional = salaService.getPorId(idsala);
+    @GetMapping("/editar/{id}")
+    public ModelAndView editar(@PathVariable("id") Long id) {
+        Optional<SalaEntity> optional = service.getPorId(id);
         ModelAndView modelAndView = view("sala/editar", "sala", optional.get());
-        return modelAndView.addAllObjects(model("salas", salaService.getAll()));
+        return modelAndView.addAllObjects(model("salas", service.getAll()));
     }
 
-    @GetMapping("/excluir/{idsala}")
-    public ModelAndView excluir(@PathVariable("idsala") Long idsala) {
-        salaService.excluirPorId(idsala);
+    @GetMapping("/excluir/{id}")
+    public ModelAndView excluir(@PathVariable("id") Long id) {
+        service.excluirPorId(id);
         return inicio();
     }
     
     @GetMapping("**/pesquisar")
     public ModelAndView pesquisar(@RequestParam("nome") String nome) {
-        ModelAndView modelAndView = view("sala/listar","salas", salaService.getPorNome(nome));
+        ModelAndView modelAndView = view("sala/listar","salas", service.getPorNome(nome));
         return modelAndView.addAllObjects(novo());
     }
     
-    @GetMapping("/relacionar/listar/{idsala}")
-    public ModelAndView listar(@PathVariable("idsala") Long idsala) {
-        Optional<SalaEntity> optional = salaService.getPorId(idsala);
+    @GetMapping("/relacionar/listar/{id}")
+    public ModelAndView listar(@PathVariable("id") Long id) {
+        Optional<SalaEntity> optional = service.getPorId(id);
         ModelAndView modelAndView = view("sala/relacionar1", "sala", optional.get());
-        return modelAndView.addAllObjects(model("relacoes", turmaService.getTurmaPorSala(idsala)));
+        return modelAndView.addAllObjects(model("relacoes", relacao1Service.getTurmaPorSala(id)));
     }
     
-    @PostMapping("/relacionar/cadastrar/{idsala}")
-    public ModelAndView cadastar(TurmaEntity turma, @PathVariable("idsala") Long idsala) {
-    	SalaEntity sala =  salaService.getPorId(idsala).get();
+    @PostMapping("/relacionar/cadastrar/{id}")
+    public ModelAndView cadastar(TurmaEntity turma, @PathVariable("id") Long id) {
+    	SalaEntity sala =  service.getPorId(id).get();
     	turma.setSala(sala);
-    	turmaService.salvar(turma);
+    	relacao1Service.salvar(turma);
         ModelAndView modelAndView = view("sala/relacionar1", "sala", sala);
-        List<TurmaEntity> turmas= turmaService.getTurmaPorSala(idsala);
+        List<TurmaEntity> turmas= relacao1Service.getTurmaPorSala(id);
         return modelAndView.addAllObjects(model("relacoes", turmas));
     }
 
