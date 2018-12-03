@@ -1,5 +1,6 @@
 package br.unipe.jacademy.resources;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -60,8 +61,8 @@ public class SalaResource extends GenericResource<SalaService, SalaEntity> {
     @GetMapping("/relacionar/listar/{idsala}")
     public ModelAndView listar(@PathVariable("idsala") Long idsala) {
         Optional<SalaEntity> optional = salaService.getPorId(idsala);
-        ModelAndView modelAndView = view("sala/relacionar", "sala", optional.get());
-        return modelAndView.addAllObjects(model("salas", salaService.getAll()));
+        ModelAndView modelAndView = view("sala/relacionar1", "sala", optional.get());
+        return modelAndView.addAllObjects(model("relacoes", turmaService.getTurmaPorSala(idsala)));
     }
     
     @PostMapping("/relacionar/cadastrar/{idsala}")
@@ -69,9 +70,9 @@ public class SalaResource extends GenericResource<SalaService, SalaEntity> {
     	SalaEntity sala =  salaService.getPorId(idsala).get();
     	turma.setSala(sala);
     	turmaService.salvar(turma);
-        ModelAndView modelAndView = view("sala/relacionar", "sala", sala);
-        return modelAndView;
-        //return modelAndView.addAllObjects(model("salas", salaService.getAll()));
+        ModelAndView modelAndView = view("sala/relacionar1", "sala", sala);
+        List<TurmaEntity> turmas= turmaService.getTurmaPorSala(idsala);
+        return modelAndView.addAllObjects(model("relacoes", turmas));
     }
 
     private Map novo(){
