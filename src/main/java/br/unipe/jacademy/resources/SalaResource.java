@@ -68,6 +68,7 @@ public class SalaResource extends GenericResource<SalaService, SalaEntity> {
     public ModelAndView cadastar(TurmaEntity turma, @PathVariable("idsala") Long idsala) {
     	SalaEntity sala =  salaService.getPorId(idsala).get();
     	turma.setSala(sala);
+    	turmaService.salvar(turma);
         ModelAndView modelAndView = view("sala/relacionar", "sala", sala);
         return modelAndView;
         //return modelAndView.addAllObjects(model("salas", salaService.getAll()));
