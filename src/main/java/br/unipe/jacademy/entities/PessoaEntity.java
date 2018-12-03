@@ -23,6 +23,7 @@ public abstract class PessoaEntity extends GenericEntity {
     private String pai;
     private String matricula;
     private String email;
+
 	public EnderecoEntity getEndereco() {
 		return endereco;
 	}

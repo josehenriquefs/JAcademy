@@ -1,7 +1,7 @@
 package br.unipe.jacademy.resources;
 
-import br.unipe.jacademy.entities.SalaEntity;
-import br.unipe.jacademy.services.SalaService;
+import br.unipe.jacademy.entities.AlunoEntity;
+import br.unipe.jacademy.services.AlunoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +12,10 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("aluno")
-public class AlunoResource extends GenericResource<SalaService, SalaEntity> {
+public class AlunoResource extends GenericResource<AlunoService, AlunoEntity> {
 
     @Autowired
-    private SalaService service;
+    private AlunoService service;
 
     @GetMapping("/listar")
     public ModelAndView inicio() {
@@ -24,7 +24,7 @@ public class AlunoResource extends GenericResource<SalaService, SalaEntity> {
     }
 
     @GetMapping("/cadastrar")
-    public ModelAndView salvar(SalaEntity entity) {
+    public ModelAndView salvar(AlunoEntity entity) {
         service.salvar(entity);
         return inicio();
     }
@@ -32,7 +32,7 @@ public class AlunoResource extends GenericResource<SalaService, SalaEntity> {
 
     @GetMapping("/editar/{idaluno}")
     public ModelAndView editar(@PathVariable("idaluno") Long idaluno) {
-        Optional<SalaEntity> optional = service.getPorId(idaluno);
+        Optional<AlunoEntity> optional = service.getPorId(idaluno);
         ModelAndView modelAndView = view("aluno/editar", "aluno", optional.get());
         return modelAndView.addAllObjects(model("alunos", service.getAll()));
     }
@@ -50,6 +50,6 @@ public class AlunoResource extends GenericResource<SalaService, SalaEntity> {
     }
 
     private Map novo(){
-        return model("aluno", new SalaEntity());
+        return model("aluno", new AlunoEntity());
     }
 }
