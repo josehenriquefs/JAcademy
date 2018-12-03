@@ -25,7 +25,7 @@ public class SalaResource extends GenericResource<SalaService, SalaEntity> {
     @Autowired
     private SalaService service;
     @Autowired
-    private TurmaService relacao1Service;
+    private TurmaService turmaService;
 
     @GetMapping("/listar")
     public ModelAndView inicio() {
@@ -58,21 +58,29 @@ public class SalaResource extends GenericResource<SalaService, SalaEntity> {
         return modelAndView.addAllObjects(novo());
     }
     
-    @GetMapping("/relacionar/listar/{id}")
-    public ModelAndView listar(@PathVariable("id") Long id) {
+    @GetMapping("/listar/turma/{id}")
+    public ModelAndView listarTurma(@PathVariable("id") Long id) {
         Optional<SalaEntity> optional = service.getPorId(id);
         ModelAndView modelAndView = view("sala/relacionar1", "sala", optional.get());
-        return modelAndView.addAllObjects(model("relacoes", relacao1Service.getTurmaPorSala(id)));
+        return modelAndView.addAllObjects(model("turmas", turmaService.getTurmaPorSala(id)));
     }
     
-    @PostMapping("/relacionar/cadastrar/{id}")
-    public ModelAndView cadastar(TurmaEntity turma, @PathVariable("id") Long id) {
+    @PostMapping("/cadastrar/turma/{id}")
+    public ModelAndView cadastarTurma(TurmaEntity turma, @PathVariable("id") Long id) {
     	SalaEntity sala =  service.getPorId(id).get();
     	turma.setSala(sala);
-    	relacao1Service.salvar(turma);
+    	turmaService.salvar(turma);
         ModelAndView modelAndView = view("sala/relacionar1", "sala", sala);
-        List<TurmaEntity> turmas= relacao1Service.getTurmaPorSala(id);
-        return modelAndView.addAllObjects(model("relacoes", turmas));
+        List<TurmaEntity> turmas= turmaService.getTurmaPorSala(id);
+        return modelAndView.addAllObjects(model("turmas", turmas));
+    }
+
+    @GetMapping("/excluir/turma/{id}")
+    public ModelAndView excluirTurma(@PathVariable("id") Long id) {
+    	SalaEntity sala = turmaService.getPorId(id).get().getSala();
+    	turmaService.excluirPorId(id);
+        ModelAndView modelAndView = view("sala/relacionar1", "sala", sala);
+        return modelAndView.addAllObjects(model("turmas", turmaService.getTurmaPorSala(sala.getId())));
     }
 
     private Map novo(){

@@ -1,5 +1,6 @@
 package br.unipe.jacademy.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -10,7 +11,7 @@ import java.util.Set;
 public class SalaEntity extends GenericEntity {
     private static final long serialVersionUID = 7L;
 
-    @OneToMany(mappedBy = "sala")
+    @OneToMany(mappedBy = "sala", cascade=CascadeType.PERSIST)
     private Set<TurmaEntity> turmas;
 
     private String nome;

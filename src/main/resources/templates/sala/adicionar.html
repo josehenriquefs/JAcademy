@@ -70,7 +70,7 @@ lang="pt-br">
     </thead>
     <tbody><tr th:each="sala : ${salas}" xmlns:th="http://www.thymeleaf.org">
       <td th:text="${sala.id}"><br /></td>
-      <td><a th:href="@{/sala/relacionar/listar/{idsala}(idsala=${sala.id})}"><span th:text="${sala.nome}"></span></a><br /></td>
+      <td><a th:href="@{/sala/listar/turma/{idsala}(idsala=${sala.id})}"><span th:text="${sala.nome}"></span></a><br /></td>
       <td th:text="${sala.disponibilidade}"><br /></td>
       <td><a th:href="@{/sala/editar/{idsala}(idsala=${sala.id})}">Editar</a></td>
       <td><a th:href="@{/sala/excluir/{idsala}(idsala=${sala.id})}">Excluir</a></td>
