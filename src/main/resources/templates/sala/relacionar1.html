@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<!--Import Thymeleaf-->
+<html xmlns="http://www.w3.org/1999/xhtml" th="http://www.thymeleaf.org"
+lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sala - Adicionar</title>
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet" />
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="/css/materialize.min.css"
+  media="screen,projection" />
+</head>
+<body>
+
+  <a class="waves-effect waves-light btn" href="/sala/listar">Salas</a>
+
+  <div th:each="s : ${sala}">
+    <div class="row">
+      <p>ID: <span th:text=${s.id}></span></p>
+      <p>Nome: <span th:text=${s.nome}></span></p>
+      <p>Disponibilidade: <span th:text=${s.disponibilidade}></span></p>
+    </div>
+  </div>
+
+
+  <h1>Turmas</h1>
+  <div class="row">
+    <form  th:action="@{/sala/cadastrar/turma/{idsala}(idsala=${sala.id})}" class="col s12" method="post">
+      <div class="row">
+
+        <div class="input-field col s12">
+          <label class="active" for="nome"></label>
+          <input name="nome" id="nome" class="validate">
+        </div>
+
+        <input type="submit" value="Adicionar" class="waves-effect waves-light btn">
+      </div>
+    </form>
+  </div>
+
+  <table class="striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="turma : ${turmas}" xmlns:th="http://www.thymeleaf.org">
+        <td th:text="${turma.id}"><br /></td>
+        <td th:text="${turma.nome}"><br /></td>
+        <td><a th:href="@{/sala/editar/turma/{idturma}(idturma=${turma.id})}">Editar</a></td>
+        <td><a th:href="@{/sala/excluir/turma/{idturma}(idturma=${turma.id})}">Excluir</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <!--JavaScript at end of body for optimized loading-->
+  <script type="text/javascript" src="/js/materialize.min.js"></script>
+</body></html>

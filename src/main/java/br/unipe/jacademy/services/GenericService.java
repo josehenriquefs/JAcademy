@@ -17,8 +17,8 @@ public abstract class GenericService<Entity extends GenericEntity, Repository ex
         return repository.findAll();
     }
 
-    public Optional<Entity> getPorId(Long idsala) {
-        return repository.findById(idsala);
+    public Optional<Entity> getPorId(Long id) {
+        return repository.findById(id);
     }
 
     public Entity salvar(Entity entity) {
