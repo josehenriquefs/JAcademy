@@ -7,5 +7,9 @@ Team:
   -José Henrique
   
   Requisites:
-    -Hibernate
-    -CRUD
+    -CRUD [DONE]
+    -Hibernate [DONE]
+    -Spring [DONE]
+    -SpringSecurity [DONE]
+   
+ Principal Contributor: Nitai Charan
