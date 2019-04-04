@@ -6,7 +6,7 @@ Team:
   -Nitai Charan
   -José Henrique
   
-  Requisites:
+  Requirements:
     -CRUD [DONE]
     -Hibernate [DONE]
     -Spring [DONE]
